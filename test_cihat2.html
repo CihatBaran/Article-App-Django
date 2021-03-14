@@ -1,0 +1,179 @@
+<p>1 - We need to create an empty folder for git repo < p ></p>
+
+<pre class="prettyprint">
+git clone https: // github.com/CihatBaran/Article-App-Django.git
+</pre>
+
+<p>2 - If we want to change any files from inside we need to do below</p>
+
+<pre class="prettyprint">
+vi .gitignore
+#insert
+i
+#to be able to change anything scroll up and down change it 
+#then write and quit with
+:wq
+</pre>
+<pre class="prettyprint">
+    git status
+    #it will give you untracked files
+</pre>
+
+<p>To remove file from folder</p>
+
+<pre class="prettyprint">
+    git rm -r <file-name>
+    #or
+    git rm -rf <file-name>
+</pre>
+
+<p>To be able to make sure that you don't have any file to delete
+    There is a way for that
+</p>
+
+
+<pre class="prettyprint">
+    git status |grep <file_name>
+    #it will give you all files that you want or not
+</pre>
+
+<p>3- First Commit</p>
+<pre class="prettyprint">
+    git add . 
+    git commit -m "First Commit"
+</pre>
+
+<strong>Commit is your local </strong>
+<strong>But push is the remote not local anymore</strong>
+<strong>if you push them all commits all the commits will be pushed</strong>
+<strong>if you only add then it will be added to your stage</strong>
+<strong>STAGE,REMOTE,LOCAL</strong>
+
+
+<pre class="prettyprint">
+    git push
+</pre>
+
+<p>
+    4 - Add new commit and compare it with previous
+</p>
+
+<p>For example we have added below to test file</p>
+
+
+<pre class="prettyprint">
+    def test_sum():
+        assert 3 == sum(1,2)
+</pre>
+
+<p>And then push it</p>
+<pre class="prettyprint">
+    git add test.py
+    git status #to check
+    git commit -m "dummy test"
+    git push
+</pre>
+
+<p> 5- Conflict between commits</p>
+
+
+<pre class="prettyprint">
+    git add . 
+    git commit -m "add"
+    git push
+    # if someone did the same changes with you you will get error
+    # then pull it it will not change your working tree
+    git pull origin master 
+    # since we are working master
+    # and you will see the places which have conflict
+    # then arrange it and push it back
+    git add .
+    git commit -m "Solved Conflict"
+    git push 
+    # RESOLVED CONFLICT
+</pre>
+
+<p> 6 - Create new Branch</p>
+
+
+<pre class="prettyprint">
+    git branch -b "cihat_feature"
+    # if you want to delete any branch
+    # delete branch locally
+    git branch -d localBranchName
+
+    # delete branch remotely
+    git push origin --delete remoteBranchName
+    
+    # and then
+    git push --set-upstream origin cihat_feature
+    # this will put our branch to remote
+    # previously it was in local branch
+    
+</pre>
+
+#================================
+
+<p> 7- Merge the commits</p>
+<p>
+    Now we have two different branchs master, cihat_feature
+    If we changed something on master and also changed on cihat_feature
+</p>
+
+<pre class="prettyprint">
+    git checkout <branch-name>
+    git checkout master #now we are on master
+    # and we have created index.html for example
+    git checkout cihat_feature
+    # then we are on cihat_feature branch
+    # we have added about html and add,commit,push to branch
+    # now we have different files for different branchs
+    # master branch cannot be pushed because it is not going to be convenient
+    # ! we need to go to GitHub 
+    # ! pull request part we need to open a new pull request
+    # ! base will be the master, compare will be the cihat_feature
+    # ! Add the explanations
+    # ! and create merge request
+    # ! under the conversation Merge Pull Request
+    # ! If there is no conflict
+    # ! Now we have pushed the feature brands changes to the master
+    # ! We can pull the last file through master
+    git pull  
+    # NOW everythins is up to date
+    
+</pre>
+
+<p> 8- Rebase the commits</p>
+
+<pre class="prettyprint">
+    
+    # assume that you have 4 different commits such below;
+    # "added url","mistake","mistake-2","added modal"
+    # in this example mistake, mistake-2 are not what we may want to commit
+    # check your branch , you will see 4 commits on your log
+    git log
+    
+    # to be able to make Merge Request 
+    # you don't want to show mistake,mistake-2
+    git rebase -i HEAD~3 #"mistake","mistake-2","added model"
+    # now you will see the document you need to change something
+    """
+    pick 31adasf213 added modal
+    pick 34davfd243 mistake-2
+    pick 33davyd243 mistake
+    change it to 👇
+    """
+    
+    """
+    pick 31adasf213 added modal
+    s 34davfd243 mistake-2
+    s 33davyd243 mistake
+    #s means squash
+    """
+    
+    git push --force-with-lease
+    #this will push rebased commits because our commit id's has been changed
+    
+    # if we go to github we will see 
+
+</pre>
