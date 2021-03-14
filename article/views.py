@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib import messages
 from article.forms import ArticleForm
 from article.models import Article
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # Article > views.py
@@ -23,6 +23,7 @@ def detail(request, id):
     return HttpResponse(f"Detail: {int(id)}")
 
 
+@login_required(login_url="user:login")
 def dashboard(request):
 
     article = Article.objects.filter(author=request.user)
@@ -34,6 +35,7 @@ def dashboard(request):
     return render(request, "dashboard.html", context)
 
 
+@login_required(login_url="user:login")
 def add_article(request):
     if request.method == "POST":
         form = ArticleForm(request.POST, request.FILES or None)
@@ -56,6 +58,7 @@ def add_article(request):
         return render(request, "article.html", context)
 
 
+@login_required(login_url="user:login")
 def ind_article(request, id):
     if request.method == "POST":
         print("method is post")
@@ -70,6 +73,7 @@ def ind_article(request, id):
         return render(request, "ind_article.html", context)
 
 
+@login_required(login_url="user:login")
 def ind_article_delete(request, id):
     article = get_object_or_404(Article, id=id)
 
@@ -79,6 +83,7 @@ def ind_article_delete(request, id):
     return redirect("article:dashboard")
 
 
+@login_required(login_url="user:login")
 def ind_article_edit(request, id):
     article = get_object_or_404(Article, id=id)
 
