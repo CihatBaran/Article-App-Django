@@ -8,6 +8,12 @@ from django.contrib.auth.decorators import login_required
 # Article > views.py
 
 
+def articles(request):
+    all_articles = Article.objects.all()
+
+    return render(request, "articles.html", {"articles": all_articles})
+
+
 def index(request):
     context = {"message": "this is message from DJANGO",
                "number": 20,
@@ -48,14 +54,14 @@ def add_article(request):
             messages.success(request, "Successfully Added")
             return redirect("article:dashboard")
         else:
-            return render(request, "article.html")
+            return render(request, "add_article.html")
 
     else:
         form = ArticleForm()
         context = {
             "forms": form
         }
-        return render(request, "article.html", context)
+        return render(request, "add_article.html", context)
 
 
 @login_required(login_url="user:login")

@@ -1,0 +1,48 @@
+{% extends 'layout.html' %} {% block body %}
+
+<h1>ARTICLES BODDY</h1>
+
+{% if articles %}
+
+<div class="accordion">
+  {% for article in articles %}
+  <div class="card mt-4" style="border-bottom: 1px solid rgb(209, 209, 209)">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button
+          class="btn btn-link"
+          data-toggle="collapse"
+          data-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          {{article.title}}
+        </button>
+      </h5>
+    </div>
+
+    <div
+      id="collapseOne"
+      class="collapse show"
+      aria-labelledby="headingOne"
+      data-parent="#accordion"
+    >
+      <div class="card-body">
+        <p class="lead">Author:{{article.author}}</p>
+        {% if article.article_image %}
+        <img
+          class="img-fluid rounded"
+          style="width: 150px"
+          src="{{article.article_image.url}}"
+          alt="{{image}}"
+        />
+        {% endif %}
+        <hr />
+        <p>{{ article.content|safe }}</p>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
+{% else %} No article currently appears {% endif %} {% endblock body %}
