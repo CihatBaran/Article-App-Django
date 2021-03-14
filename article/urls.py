@@ -9,5 +9,6 @@ urlpatterns = [
     path('dashboard/<int:id>', ind_article, name="ind_article"),
     path('dashboard/edit/<int:id>', ind_article_edit, name="ind_article"),
     path('dashboard/delete/<int:id>', ind_article_delete, name="ind_article"),
-    path('add-article/', add_article, name="article_add")
+    path('add-article/', add_article, name="article_add"),
+    path('new/api', dashboard)
 ]
