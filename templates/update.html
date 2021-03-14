@@ -1,33 +1,18 @@
-{% extends 'layout.html' %}
-{% load crispy_forms_tags %}
-
-{% block body %}
+{% extends 'layout.html' %} {% load crispy_forms_tags %} {% block body %}
 
 <div class="row">
   <div class="col-sm-9">
-    {% if messages %}
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-success" role="alert">{{ message }}</div>
+    {% endfor %} {% endif %}
 
-    {% for message in messages %}
-        <div class="alert alert-success" role="alert">
-        {{ message }}
-        </div>
-    {% endfor %}  
-    
-    {% endif %}
-    
-  <h3 class="mt-5"> Update Article </h3>
-    <hr/>
-    <form method="POST" enctype="multipart/form-data"> 
-
-        {% csrf_token %}
-        {{ forms.media}}
-        {{ forms|crispy }}
-        <button type="submit" class="btn btn-primary">Submit</button>
-        
+    <h3 class="mt-5">Update Article</h3>
+    <hr />
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %} {{ forms.media}} {{ forms|crispy }}
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-  
   </div>
 </div>
-    
-{% endblock body %}
 
+{% endblock body %}
