@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+{% if messages %}
+
+  {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+    </div>
+  {% endfor %}  
+  
+{% endif %}
+
+<h3 class="mt-4">Dashboard</h3>
+<hr>
+<p>Welcome to page <small>{{ request.user.username }}</small></p>
+
+<a href="/article/add-article"  class="btn btn-success">Add Article</a>
+<hr>
+
+
+{% if articles %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Author</th>
+      <th scope="col">Title</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {% for article in articles  %}
+    
+  
+    <tr>
+      <th scope="row">{{ article.id }}</th>
+      <td>{{article.author.username}}</td>
+      <td><a href="{{article.id}}">{{article.title}}</a></td>
+      <td>{{article.created_date|date:'N-d-Y | g:i:A'}}</td>
+      
+    </tr>
+    {% endfor %}
+   
+   
+    
+  </tbody>
+</table>
+{% else %}
+
+<div class="alert alert-danger" role="alert">
+  Please add article 👆
+</div>
+
+{% endif %}
+
+
+
+
+
+{% endblock body %}

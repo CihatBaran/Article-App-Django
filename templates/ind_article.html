@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+<h3 class="mt-4">Article</h3>
+<hr>
+<p>Welcome to page <small>{{ request.user.username }}</small></p>
+
+
+<div class="backdrop--sheet"></div>
+  <div class="confirming--page">
+      <p>Are you sure you want to delete?</p>
+      
+      <button class="btn btn-success" id="cancel-me">Cancel</button>
+      <a href="delete/{{indv_article.id}}"><button class="btn btn-danger">
+          Delete
+      </button>
+      </a>
+  </div>
+  
+<div class="jumbotron indv--item">
+  
+  {% if indv_article.article_image %}
+  <img class="img-fluid rounded" style="width:150px"src="{{indv_article.article_image.url}}" alt="{{image}}">
+  <hr>
+  {% endif %}
+  
+  <div class="indv--item__action" id="indv--item__action"> 
+      
+      {% comment %} href="edit/{{indv_article.id}}" {% endcomment %}
+      
+      <a class="indv--item__action-item" href="edit/{{indv_article.id}}"> 
+        <i class="far fa-edit"></i>
+      </a>  
+      <a  class="indv--item__action-item" id="delete_me"> 
+        <i class="far fa-trash-alt focus"></i>
+      </a>  
+  </div>
+  
+  
+ 
+  
+  <h4 class="display-4">{{indv_article.title}}</h4>
+  <p class="lead">{{indv_article.author}}</p>
+  <hr class="my-4">
+  <p>{{ indv_article.content|safe }}</p>
+ 
+  
+</div>
+
+
+
+{% endblock body %}

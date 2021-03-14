@@ -1,0 +1,19 @@
+{% extends 'layout.html' %} {% block body %}
+
+{% if messages %}
+
+  {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+    </div>
+  {% endfor %}  
+  
+{% endif %}
+     
+<div class="jumbotron text-center" style="margin-top: 20px">
+  <h3>Software Blog</h3>
+  <p>This is our first software blog and we are excited to move forward!</p>
+</div>
+
+
+{% endblock body %}
