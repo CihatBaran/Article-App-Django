@@ -5,6 +5,10 @@ test_cihat2.html
 #vs code files
 *.vscode
 
+#Test
+test_cihat.py
+test_cihat2.html
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

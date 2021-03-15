@@ -14,7 +14,4 @@ urlpatterns = [
 
     path('mainpage', add_article, name="main_page_article"),
     path('new/api', dashboard),
-    path('new/api/<ind:id>', dashboard),
-
-
 ]
