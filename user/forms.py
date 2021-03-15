@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 
 
 class RegisterForm(forms.Form):
@@ -18,7 +19,6 @@ class RegisterForm(forms.Form):
         if password and confirm and password != confirm:
             raise forms.ValidationError("Passwords are not same")
 
-        User = get_user_model()
         users = User.objects.values()
         for user in users:
             if user["username"] == username:

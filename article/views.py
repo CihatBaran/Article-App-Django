@@ -72,17 +72,12 @@ def add_article(request):
 
 @login_required(login_url="user:login")
 def ind_article(request, id):
-    if request.method == "POST":
-        print("method is post")
-        pass
-    else:
-
-        # indv_article = Article.objects.get(id=id)
-        indv_article = get_object_or_404(Article, id=id)
-        context = {
-            "indv_article": indv_article
-        }
-        return render(request, "ind_article.html", context)
+    # indv_article = Article.objects.get(id=id)
+    indv_article = get_object_or_404(Article, id=id)
+    context = {
+        "indv_article": indv_article
+    }
+    return render(request, "ind_article.html", context)
 
 
 @login_required(login_url="user:login")
